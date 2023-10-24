@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kids Savings Tracker</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <!--Form where you can add or subract money-->
+    <div class="container">
+      <h1>Savings Tracker</h1>
+      <form>
+        <div class="form-group">
+          <label for="allowance">Allowance:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="allowance"
+            placeholder="Enter allowance"
+          />
+        </div>
+        <div class="form-group">
+          <label for="purchase">Purchase:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="purchase"
+            placeholder="Enter purchase amount"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <!-- Goal Setting Section -->
+      <div class="goal-section mt-4">
+        <h2>Set Your Savings Goal:</h2>
+        <div class="form-group">
+          <label for="savingsGoal">Goal Amount:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="savingsGoal"
+            placeholder="Set your savings goal"
+          />
+        </div>
+        <button type="button" class="btn btn-success" id="setGoalButton">
+          Set Goal
+        </button>
+      </div>
+
+      <!--Visually showing the progress-->
+      <!--Change the value of "width" to change the progress bar. -->
+      <h2>Your Savings:</h2>
+      <div class="progress">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          style="width: 50%"
+          aria-valuenow="50"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          50%
+        </div>
+      </div>
+      <h3>Savings Goal: $100</h3>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
