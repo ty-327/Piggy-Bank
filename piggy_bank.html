@@ -34,6 +34,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      <h3>Account Balance: $<span id="accountBalanceDisplay">0</span></h3>
 
       <!-- Goal Setting Section -->
       <div class="goal-section mt-4">
@@ -67,11 +68,58 @@
           50%
         </div>
       </div>
-      <h3>Savings Goal: $100</h3>
-    </div>
+      <h3>Savings Goal: $<span id="savingsGoalDisplay">100</span></h3>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        let currentSavings = 0;
+        let savingsGoal = 100;
+    
+        // Function to update progress, savings goal, and account balance
+        function updateDisplay() {
+          const progress = (currentSavings / savingsGoal) * 100;
+          $('.progress-bar').css('width', progress + '%');
+          $('.progress-bar').text(progress.toFixed(2) + '%');
+          $('#savingsGoalDisplay').text(savingsGoal);
+          $('#accountBalanceDisplay').text(currentSavings);
+        }
+    
+        $('#setGoalButton').click(function () {
+          const newGoal = parseFloat($('#savingsGoal').val());
+          if (!isNaN(newGoal) && newGoal > 0) {
+            savingsGoal = newGoal;
+            updateDisplay();
+            $('#savingsGoal').val('');
+          }
+        });
+    
+        $('form').submit(function (event) {
+          event.preventDefault();
+    
+          const allowance = parseFloat($('#allowance').val());
+          const purchase = parseFloat($('#purchase').val());
+    
+          if (!isNaN(allowance)) {
+            currentSavings += allowance;
+          }
+    
+          if (!isNaN(purchase)) {
+            currentSavings -= purchase;
+          }
+    
+          updateDisplay();
+    
+          $('#allowance').val('');
+          $('#purchase').val('');
+        });
+    
+        // Initial display update
+        updateDisplay();
+      });
+    </script>        
   </body>
 </html>
