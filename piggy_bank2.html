@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids Savings Tracker</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+        .form-control {
+            flex: 1;
+            width: auto;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Savings Tracker</h1>
+
+        <!-- Combined Input Box and Account Balance -->
+        <div class="form-group">
+            <input type="number" class="form-control" id="transaction" placeholder="Enter amount">
+            <h3 class="ml-3">Account Balance: $<span id="accountBalanceDisplay">0</span></h3>
+        </div>
+        <div class="buttons mt-3">
+            <button type="button" class="btn btn-success mr-2" id="addButton">Add</button>
+            <button type="button" class="btn btn-danger mr-2" id="subtractButton">Subtract</button>
+            <button type="button" class="btn btn-primary" id="setGoalButton">Set Goal</button>
+        </div>
+
+        <!-- Progress Bar and Goal -->
+        <div class="mt-4">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                    50%
+                </div>
+            </div>
+            <h3>Savings Goal: $<span id="savingsGoalDisplay">100</span></h3>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            let currentSavings = 0;
+            let savingsGoal = 100;
+
+            function updateDisplay() {
+                const progress = (currentSavings / savingsGoal) * 100;
+                $('.progress-bar').css('width', progress + '%');
+                $('#savingsGoalDisplay').text(savingsGoal);
+                $('#accountBalanceDisplay').text(currentSavings);
+            }
+
+            $('#addButton').click(function () {
+                const amount = parseFloat($('#transaction').val());
+                if (!isNaN(amount)) {
+                    currentSavings += amount;
+                    updateDisplay();
+                    $('#transaction').val('');
+                }
+            });
+
+            $('#subtractButton').click(function () {
+                const amount = parseFloat($('#transaction').val());
+                if (!isNaN(amount)) {
+                    currentSavings -= amount;
+                    updateDisplay();
+                    $('#transaction').val('');
+                }
+            });
+
+            $('#setGoalButton').click(function () {
+                const newGoal = parseFloat($('#transaction').val());
+                if (!isNaN(newGoal) && newGoal > 0) {
+                    savingsGoal = newGoal;
+                    updateDisplay();
+                    $('#transaction').val('');
+                }
+            });
+
+            updateDisplay();
+        });
+    </script>
+</body>
+</html>
